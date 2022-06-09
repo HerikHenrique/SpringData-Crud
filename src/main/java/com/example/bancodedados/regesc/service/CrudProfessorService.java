@@ -102,4 +102,8 @@ public class CrudProfessorService {
         professorRepository.save(professor);//Atualiza ou persiste o objeto/registro ou tupla no Banco de Dados
         System.out.println("Professor Atualizado com sucesso!!!\n");
     }
+
+    public void minhaFuncaoTestGit(){
+        System.out.println("Teste Git Pull");
+    }
 }
