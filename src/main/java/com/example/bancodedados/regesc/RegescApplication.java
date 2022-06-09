@@ -2,16 +2,21 @@ package com.example.bancodedados.regesc;
 
 import com.example.bancodedados.regesc.orm.Professor;
 import com.example.bancodedados.regesc.repository.ProfessorRepository;
+import com.example.bancodedados.regesc.service.CrudProfessorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Scanner;
+
 @SpringBootApplication
 public class RegescApplication implements CommandLineRunner {
-	private ProfessorRepository repository;
+	private CrudProfessorService professorService;
 
-	public RegescApplication(ProfessorRepository repository){
-		this.repository = repository;
+    //Objetos passados por parâmetro são injetados automaticamente pelo Spring
+    //pq suas classes possuem a anotação @Service
+	public RegescApplication(CrudProfessorService professorService){
+        this.professorService = professorService;
 	}
 
 	public static void main(String[] args) {
@@ -20,12 +25,25 @@ public class RegescApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Professor professor = new Professor("Samuka", "xyz");
-		System.out.println("Professor ANTES do Save(Persistencia com o banco de Dados)");
-		System.out.println(professor);
-		this.repository.save(professor);
+        Boolean isTrue = true;
 
-		System.out.println("Professor DEPOIS do Save(Persistencia com o banco de Dados)");
-		System.out.println(professor);
+        Scanner sc = new Scanner(System.in);
+
+        while(isTrue){
+            System.out.println("\nQual Entidade você deseja interagir?");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Interagir com o Professor");
+
+            int opcao = sc.nextInt();
+
+            switch(opcao){
+                case 1:
+                    this.professorService.menu(sc);
+                    break;
+                default:
+                    isTrue = false;
+                    break;
+            }
+        }
 	}
 }
