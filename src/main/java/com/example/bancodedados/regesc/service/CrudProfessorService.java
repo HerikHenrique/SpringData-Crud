@@ -35,7 +35,7 @@ public class CrudProfessorService {
                     this.cadastrar(sc);
                     break;
                 case 2:
-                    this.atualizar(sc);
+                    this.atualizarSemFindById(sc);
                     break;
                 default:
                     isTrue = false;
@@ -83,5 +83,23 @@ public class CrudProfessorService {
         else{
             System.out.println("O id do professor informado: " + id + "é invalido\n");
         }
+    }
+    private void atualizarSemFindById(Scanner sc){
+        System.out.println("Digite o Id do Professor a ser atualizado: ");
+        Long id = sc.nextLong();
+
+        System.out.println("Digite o nome do professor");
+        String nome = sc.next(); // Le a Próxima String até achar um enter ou espaço
+
+        System.out.println("Digite o prontuário do professor: ");
+        String prontuario = sc.next();
+
+        Professor professor = new Professor();
+        professor.setId(id);
+        professor.setNome(nome);
+        professor.setProntuario(prontuario);
+
+        professorRepository.save(professor);//Atualiza ou persiste o objeto/registro ou tupla no Banco de Dados
+        System.out.println("Professor Atualizado com sucesso!!!\n");
     }
 }
