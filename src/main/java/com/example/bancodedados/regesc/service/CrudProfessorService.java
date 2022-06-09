@@ -27,6 +27,8 @@ public class CrudProfessorService {
             System.out.println("0 - Voltar ao menu anterior");
             System.out.println("1 - Cadastrar novo professor");
             System.out.println("2 - Atualizar um Professor");
+            System.out.println("3 - Visualizar Professor");
+            System.out.println("4 Deletar um professor");
 
             int opcao = sc.nextInt();
 
@@ -37,6 +39,11 @@ public class CrudProfessorService {
                 case 2:
                     this.atualizar(sc);
                     break;
+                case 3:
+                    this.visualizar();
+                    break;
+                case 4:
+                    this.deletar(sc);
                 default:
                     isTrue = false;
                     break;
@@ -83,5 +90,30 @@ public class CrudProfessorService {
         else{
             System.out.println("O id do professor informado: " + id + "é invalido\n");
         }
+    }
+
+
+    private void visualizar(){
+        Iterable<Professor> professores = this.professorRepository.findAll();
+//        for(Professor professor : professores){
+//            System.out.println(professor);
+//        }
+//        professores.forEach(professor ->{ //Lambda Function
+//            System.out.println(professor);
+//        });
+
+        professores.forEach(System.out::println);
+
+        System.out.println();
+
+    }
+
+
+    private void deletar(Scanner sc){
+        System.out.println("Digite o Id do Professor a ser atualizado: ");
+        Long id = sc.nextLong();
+
+        this.professorRepository.deleteById(id);//Se o Id não for encontrado, lançará uma exception
+        System.out.println("Professor Deletado!\n");
     }
 }
