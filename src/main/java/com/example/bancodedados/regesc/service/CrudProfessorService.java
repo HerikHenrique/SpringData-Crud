@@ -54,7 +54,7 @@ public class CrudProfessorService {
 
     private void cadastrar(Scanner sc){
         System.out.println("Digite o nome do professor");
-        String nome = sc.next(); // Le a Próxima String até achar um enter ou espaço
+        String nome = sc.nextLine(); // Le a Próxima String até achar um enter ou espaço
 
         System.out.println("Digite o prontuário do professor: ");
         String prontuario = sc.next();
@@ -75,7 +75,9 @@ public class CrudProfessorService {
         if(optional.isPresent()){
 
             System.out.println("Digite o nome do professor");
-            String nome = sc.next(); // Le a Próxima String até achar um enter ou espaço
+            String nome = "";
+            nome += sc.next(); // Le a Próxima String até achar um enter ou espaço
+
 
             System.out.println("Digite o prontuário do professor: ");
             String prontuario = sc.next();
